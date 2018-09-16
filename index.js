@@ -28,7 +28,9 @@ app_router(router, db);
 app.use('/api', router);
 app.get('/api', (req, res) => {
     logger.info("New request");
-    res.status(200).json({ "message": "Welcome!" });
+    res.status(200).json({
+        "message": "Welcome!"
+    });
 });
 
 db.sequelize.sync().then(() => {
