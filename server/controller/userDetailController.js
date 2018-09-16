@@ -4,7 +4,7 @@ import logger from '../logging/logger';
 const Op = db.Sequelize.Op;
 const getUserDetail = (req, res) => {
   const id = req.params.id;
-  logger(3, `Get userDetail: ${id}`);
+  logger.info(`Get userDetail: ${id}`);
 
   db.userDetail.findOne({
     where: { id: { [Op.eq]: id } },

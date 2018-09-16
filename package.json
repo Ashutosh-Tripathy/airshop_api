@@ -5,8 +5,9 @@
   "main": "server.js",
   "repository": "git@git.toptal.com:Ashutosh-Tripathy/ashutosh-tripathy.git",
   "author": "Ashutosh Triathy",
+  "dev": "NODE_PATH=./ pm2 start --interpreter babel-node index.js --watch",
   "scripts": {
-    "dev": "NODE_PATH=./ pm2 start --interpreter babel-node index.js --watch",
+    "dev": "NODE_PATH=./ nodemon --exec npx babel-node -- ./index.js --watch",
     "start": "npm-run-all --parallel dev",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
