@@ -1,10 +1,9 @@
 'use strict'
-import authenticate from './routes/authenticate';
-import userDetail from './routes/userDetail';
+// import authenticate from './routes/authenticate';
+import userDetailRoutes from './routes/userDetail';
 
 const routes = [
-    authenticate,
-    userDetail
+    userDetailRoutes
 ];
 
 // Add access to the app and db objects to each route

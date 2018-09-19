@@ -52,4 +52,4 @@ db.state.hasMany(db.district, { foreignKey: 'state_id' });
 
 
 
-module.exports = db;
+export default db;

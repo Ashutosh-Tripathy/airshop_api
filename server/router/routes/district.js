@@ -1,5 +1,4 @@
 'use strict';
-import bcrypt from 'bcrypt';
 import logger from '../../logging/logger';
 const saltRounds = 3;
 

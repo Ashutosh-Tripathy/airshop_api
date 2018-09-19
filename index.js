@@ -1,11 +1,11 @@
 import logger from './server/logging/logger';
 import express from 'express';
 import bodyParser from 'body-parser';
-import env from 'server/config/env';
+import env from './server/config/env';
 import app_router from './server/router/index';
 import db from './server/config/db';
-import verifytoken from './server/middleware/verifytoken';
-import authorize from './server/middleware/authorize';
+// import verifytoken from './server/middleware/verifytoken';
+// import authorize from './server/middleware/authorize';
 import cors from 'cors';
 const app = express();
 app.use(cors());
@@ -36,6 +36,6 @@ app.get('/api', (req, res) => {
 db.sequelize.sync().then(() => {
     app.listen(env.PORT, function listenHandler() {
         console.info('Running on: ' + env.PORT);
-    })
+    });
 });
 logger.info("server started.");

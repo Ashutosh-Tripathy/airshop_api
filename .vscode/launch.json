@@ -7,30 +7,14 @@
         {
             "type": "node",
             "request": "attach",
-            "name": "Attach",
-            "port": 9229
+            "name": "Attach by Process ID",
+            "processId": "${command:PickProcess}"
         },
         {
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/index.js"
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch",
-            "runtimeExecutable": "yarn",
-            "runtimeArgs": [
-                "dev"
-            ],
-            "port": 9229
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\index.js"
+            "program": "${workspaceFolder}\\server.js"
         }
     ]
 }
