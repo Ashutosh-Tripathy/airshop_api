@@ -3,6 +3,7 @@ import logger from '../logging/logger';
 
 const Op = db.Sequelize.Op;
 const getUserDetail = (req, res) => {
+  debugger;
   const id = req.params.id;
   logger.info(`get userDetail: ${id}`);
 
@@ -31,6 +32,6 @@ const handleError = (err) => {
   res.status(500).json({
     message: 'Unsuccessful, Please try again.'
   });
-}
+};
 
 export default getUserDetail;

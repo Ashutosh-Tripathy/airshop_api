@@ -4,11 +4,11 @@
 // { emerg: 0, alert: 1, crit: 2, error: 3, warning: 4, notice: 5, info: 6, debug: 7 }
 
 
-var winston = require('winston');
+const winston = require('winston');
 const { format } = winston;
 const { combine, timestamp, label } = format;
 //var logLevel = getLogLevel();
-var moment = require('moment');
+const moment = require('moment');
 //Set unhandeld exception behaviour
 //winston.handleExceptions(new winston.transports.File({ filename: '/var/log/ft/exceptions.log' }));
 
@@ -58,13 +58,14 @@ function getTime() {
 //    }
 //    return logLevel;
 //}
-var pattern = winston.format.combine(
-  winston.format.colorize(),
-  winston.format.json(),
-   format.timestamp({
-     format: 'YYYY-MM-DD HH:mm:ss:SSS'
-    })
-);
+// var pattern = winston.format.combine(
+//   winston.format.colorize(),
+//   winston.format.json(),
+//    format.timestamp({
+//      format: 'YYYY-MM-DD HH:mm:ss:SSS'
+//     })
+// );
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),

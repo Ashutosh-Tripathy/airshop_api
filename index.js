@@ -9,7 +9,7 @@ import db from './server/config/db';
 import cors from 'cors';
 const app = express();
 app.use(cors());
-var router = express.Router();
+const router = express.Router();
 app.set('superSecret', env.SECRET);
 
 app.use(bodyParser.json());
