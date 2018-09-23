@@ -34,9 +34,7 @@ const userDetail = (sequelize, DataTypes) => {
     streetAddress: {
       type: DataTypes.STRING,
       length: 100
-    },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+    }
   }, {
     paranoid: true,
     timestamps: true,

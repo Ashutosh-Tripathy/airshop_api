@@ -22,9 +22,7 @@ const order = (sequelize, DataTypes) => {
     note: {
       type: DataTypes.STRING,
       length: 5000
-    },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+    }
   }, {
     paranoid: true,
     timestamps: true,
