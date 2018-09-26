@@ -1,7 +1,7 @@
 import {
     findById,
     testFn
-} from './util';
+} from './dal';
 
 // console.log('index' + findById);
 export default {
