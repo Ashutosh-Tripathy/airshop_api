@@ -3,7 +3,7 @@ import logger from '../logging/logger';
 import dal from '../dal';
 
 const Op = db.Sequelize.Op;
-const getUserDetail = async (req, res) => {
+const getUserDetail = (req, res) => {
   const id = req.params.id;
   logger.info(`get userDetail: ${id}`);
 

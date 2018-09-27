@@ -1,9 +1,13 @@
 import getUserDetail from './userDetailController';
 import getState from './stateController';
-import getDistrict from './districtController';
+import {
+    getDistrict,
+    getAllDistrict
+} from './districtController';
 
 export default {
     getUserDetail,
     getState,
-    getDistrict
+    getDistrict,
+    getAllDistrict
 };

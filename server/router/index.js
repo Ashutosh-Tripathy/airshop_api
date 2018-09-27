@@ -6,8 +6,8 @@ import districtRoutes from './routes/district';
 
 const routes = [
     userDetailRoutes,
-    stateRoutes,
-    districtRoutes
+    districtRoutes,
+    stateRoutes
 ];
 
 // Add access to the app and db objects to each route
