@@ -1,3 +1,9 @@
 import getUserDetail from './userDetailController';
-export default {getUserDetail};
+import getState from './stateController';
+import getDistrict from './districtController';
 
+export default {
+    getUserDetail,
+    getState,
+    getDistrict
+};
