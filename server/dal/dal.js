@@ -42,8 +42,6 @@ export const findById = (model, id) => new Promise((resolve, reject) => {
 });
 
 export const findByCondition = (model, condition, orderBy) => new Promise((resolve, reject) => {
-    console.log(JSON.stringify(model));
-    console.log(condition);
     model.findAll({
             where: condition,
             order: orderBy || []
@@ -72,7 +70,6 @@ export const findByCondition = (model, condition, orderBy) => new Promise((resol
 });
 
 export const insertData = (model, data) => new Promise((resolve, reject) => {
-    console.log(JSON.stringify(data));
     model.create(data)
         .then(out => {
             if (!out) {
@@ -97,27 +94,68 @@ export const insertData = (model, data) => new Promise((resolve, reject) => {
         }));
 });
 
+export const updateById = (model, data, id) => new Promise((resolve, reject) => {
+    model.update(
+            data, {
+                where: {
+                    id: {
+                        [Op.eq]: id
+                    }
+                }
+            })
+        .then(out => {
+            if (!out[0]) {
+                resolve({
+                    data: {
+                        message: 'Resource not found.'
+                    },
+                    statusCode: 404
+                });
+            } else {
+                resolve({
+                    data: out,
+                    statusCode: 200
+                });
+            }
+        })
+        .catch((err) => resolve({
+            data: {
+                message: 'Error occoured. Please try again later.'
+            },
+            statusCode: 500
+        }));
+});
 
-// (new Promise(resolve, reject) {
-//     model.findOne({
-//             where: {
-//                 id: {
-//                     [Op.eq]: id
-//                 }
-//             }
-//         })
-//         .then(data =>
-//             new Promise((resolve, reject) => {
-//                 if (!data) {
-//                     resolve({
-//                         message: 'Resource not found.'
-//                     }, 404);
-//                 } else {
-//                     resolve(data, 200);
-//                 }
-//             }))
-//         .catch((err) => throws(err));
-// })
+export const deleteById = (model, id) => new Promise((resolve, reject) => {
+    model.destroy({
+            where: {
+                id: {
+                    [Op.eq]: id
+                }
+            }
+        })
+        .then(affectedRows => {
+            if (!affectedRows) {
+                resolve({
+                    data: {
+                        message: 'Resource not found.'
+                    },
+                    statusCode: 404
+                });
+            } else {
+                resolve({
+                    data: affectedRows,
+                    statusCode: 200
+                });
+            }
+        })
+        .catch((err) => resolve({
+            data: {
+                message: 'Error occoured. Please try again later.'
+            },
+            statusCode: 500
+        }));
+});
 
 export const testFn = (model, id) => new Promise((resolve, reject) => {
     setTimeout(resolve({

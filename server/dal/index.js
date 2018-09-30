@@ -2,13 +2,18 @@ import {
     findById,
     findByCondition,
     insertData,
+    updateById,
+    deleteById,
     testFn
 } from './dal';
+import convertObject from './ObjectConverter';
 
-// console.log('index' + findById);
 export default {
     findById,
     findByCondition,
     insertData,
+    updateById,
+    deleteById,
+    convertObject,
     testFn
 };

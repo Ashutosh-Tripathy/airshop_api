@@ -6,6 +6,7 @@ const userDetailRoutes= (router, db) => {
   router.get('/orderdetail/:id', controller.getOrderDetail);
   router.post('/orderdetail', controller.insertOrderDetail);
   router.get('/orders', controller.getOrders);
+  router.patch('/orderdetail/:id', controller.updateOrderDetail);
   //router.post('userdetail', controller.createUserDetail);
 };
 export default userDetailRoutes;

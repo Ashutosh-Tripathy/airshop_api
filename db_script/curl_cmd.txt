@@ -5,4 +5,5 @@ curl -H "Content-Type: application/json" -X POST -d '{"id": 2, "gender": "M", "m
 curl -H "Content-Type: application/json" -X POST -d '{"name": "test3", "mobile": 9867917163, "state_id": 1, "district_id": 1, "area": "cv raman nagar", "streetAddress": "3b classik retreat, 29b cross"}' http://localhost:3000/api/userdetail
 curl -H "Content-Type: application/json" -X POST -d '{"buyer_id": 1, "seller_id": 2, "note": "test note"}' http://localhost:3000/api/orderdetail
 curl -H "Content-Type: application/json" -X POST -d '{"buyer_id": 1, "seller_id": 3, "note": "test note"}' http://localhost:3000/api/orderdetail
+curl -H "Content-Type: application/json" -X POST -d '{"buyer_id": 1, "seller_id": 3, "note": "test note", "created_at": "2010-09-23 17:33:45.484 +00:00"}' http://localhost:3000/api/orderdetail
 

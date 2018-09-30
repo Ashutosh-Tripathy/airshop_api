@@ -32,7 +32,9 @@ app.get('/api', (req, res) => {
         "message": "Welcome!"
     });
 });
+// app.use(function (req, res, next) {
 
+// });
 db.sequelize.sync().then(() => {
     app.listen(env.PORT, function listenHandler() {
         console.info('Running on: ' + env.PORT);

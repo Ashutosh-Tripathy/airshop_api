@@ -45,10 +45,24 @@ export const getOrders = (req, res) => {
 };
 
 export const insertOrderDetail = (req, res) => {
-  const body = req.body;
-  logger.info(`post orderDetail: ${body}`);
+  const body = dal.convertObject(req.body, 'orderDetail', 'post');
+  logger.info(`post orderDetail: ${JSON.stringify(body)}`);
 
   dal.insertData(db.orderDetail, body)
+    .then(({
+      data,
+      statusCode
+    }) => {
+      res.status(statusCode).json(data);
+    });
+};
+
+export const updateOrderDetail = (req, res) => {
+  const id = req.params.id;
+  const body = dal.convertObject(req.body, 'orderDetail', 'patch');
+  logger.info(`patch orderDetail: ${JSON.stringify(body)}`);
+
+  dal.updateById(db.orderDetail, body, id)
     .then(({
       data,
       statusCode

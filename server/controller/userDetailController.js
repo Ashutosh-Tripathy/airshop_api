@@ -18,7 +18,7 @@ export const getUserDetail = (req, res) => {
 
 
 export const insertUserDetail = (req, res) => {
-  const body = req.body;
+  const body = dal.convertObject(req.body, 'user Detail');
   logger.info(`post userDetail: ${body}`);
 
   dal.insertData(db.userDetail, body)
@@ -29,4 +29,3 @@ export const insertUserDetail = (req, res) => {
       res.status(statusCode).json(data);
     });
 };
-

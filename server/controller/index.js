@@ -10,7 +10,8 @@ import {
 import {
     getOrderDetail,
     insertOrderDetail,
-    getOrders
+    getOrders,
+    updateOrderDetail
 } from './orderDetailController';
 
 export default {
@@ -21,5 +22,6 @@ export default {
     getAllDistrict,
     getOrderDetail,
     insertOrderDetail,
-    getOrders
+    getOrders,
+    updateOrderDetail
 };
