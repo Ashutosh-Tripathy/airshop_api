@@ -1,19 +1,25 @@
-import getUserDetail from './userDetailController';
+import {
+    getUserDetail,
+    insertUserDetail
+} from './userDetailController';
 import getState from './stateController';
 import {
     getDistrict,
     getAllDistrict
 } from './districtController';
 import {
-    getOrder,
+    getOrderDetail,
+    insertOrderDetail,
     getOrders
 } from './orderDetailController';
 
 export default {
     getUserDetail,
+    insertUserDetail,
     getState,
     getDistrict,
     getAllDistrict,
-    getOrder,
+    getOrderDetail,
+    insertOrderDetail,
     getOrders
 };

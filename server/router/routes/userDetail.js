@@ -4,6 +4,7 @@ import controller from '../../controller';
 
 const userDetailRoutes= (router, db) => {
   router.get('/userdetail/:id', controller.getUserDetail);
+  router.post('/userdetail', controller.insertUserDetail);
   //router.post('userdetail', controller.createUserDetail);
 };
 export default userDetailRoutes;

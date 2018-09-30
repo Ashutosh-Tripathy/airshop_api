@@ -1,6 +1,7 @@
 import {
     findById,
     findByCondition,
+    insertData,
     testFn
 } from './dal';
 
@@ -8,5 +9,6 @@ import {
 export default {
     findById,
     findByCondition,
+    insertData,
     testFn
 };

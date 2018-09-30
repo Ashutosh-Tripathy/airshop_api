@@ -3,7 +3,7 @@ import logger from '../logging/logger';
 import dal from '../dal';
 
 const Op = db.Sequelize.Op;
-export const getOrder = (req, res) => {
+export const getOrderDetail = (req, res) => {
   const id = req.params.id;
   logger.info(`get orderDetail: ${id}`);
 
@@ -33,7 +33,22 @@ export const getOrders = (req, res) => {
     };
   }
 
-  dal.findByCondition(db.orderDetail, condition, ['created_at'])
+  dal.findByCondition(db.orderDetail, condition, [
+      ['created_at', 'DESC']
+    ])
+    .then(({
+      data,
+      statusCode
+    }) => {
+      res.status(statusCode).json(data);
+    });
+};
+
+export const insertOrderDetail = (req, res) => {
+  const body = req.body;
+  logger.info(`post orderDetail: ${body}`);
+
+  dal.insertData(db.orderDetail, body)
     .then(({
       data,
       statusCode

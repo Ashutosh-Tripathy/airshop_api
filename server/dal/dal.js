@@ -42,7 +42,7 @@ export const findById = (model, id) => new Promise((resolve, reject) => {
 });
 
 export const findByCondition = (model, condition, orderBy) => new Promise((resolve, reject) => {
-    console.log(model);
+    console.log(JSON.stringify(model));
     console.log(condition);
     model.findAll({
             where: condition,
@@ -70,6 +70,33 @@ export const findByCondition = (model, condition, orderBy) => new Promise((resol
             statusCode: 500
         }));
 });
+
+export const insertData = (model, data) => new Promise((resolve, reject) => {
+    console.log(JSON.stringify(data));
+    model.create(data)
+        .then(out => {
+            if (!out) {
+                resolve({
+                    data: {
+                        message: 'Resource not created.'
+                    },
+                    statusCode: 500
+                });
+            } else {
+                resolve({
+                    data: out,
+                    statusCode: 200,
+                });
+            }
+        })
+        .catch((err) => resolve({
+            data: {
+                message: 'Error occoured. Please try again later.'
+            },
+            statusCode: 500
+        }));
+});
+
 
 // (new Promise(resolve, reject) {
 //     model.findOne({

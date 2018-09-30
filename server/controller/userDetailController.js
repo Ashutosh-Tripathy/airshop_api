@@ -3,7 +3,7 @@ import logger from '../logging/logger';
 import dal from '../dal';
 
 const Op = db.Sequelize.Op;
-const getUserDetail = (req, res) => {
+export const getUserDetail = (req, res) => {
   const id = req.params.id;
   logger.info(`get userDetail: ${id}`);
 
@@ -16,4 +16,17 @@ const getUserDetail = (req, res) => {
     });
 };
 
-export default getUserDetail;
+
+export const insertUserDetail = (req, res) => {
+  const body = req.body;
+  logger.info(`post userDetail: ${body}`);
+
+  dal.insertData(db.userDetail, body)
+    .then(({
+      data,
+      statusCode
+    }) => {
+      res.status(statusCode).json(data);
+    });
+};
+
