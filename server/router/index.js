@@ -3,11 +3,13 @@
 import userDetailRoutes from './routes/userDetail';
 import stateRoutes from './routes/state';
 import districtRoutes from './routes/district';
+import orderDetailRoutes from './routes/orderDetail';
 
 const routes = [
     userDetailRoutes,
     districtRoutes,
-    stateRoutes
+    stateRoutes,
+    orderDetailRoutes
 ];
 
 // Add access to the app and db objects to each route

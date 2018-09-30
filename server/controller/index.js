@@ -4,10 +4,16 @@ import {
     getDistrict,
     getAllDistrict
 } from './districtController';
+import {
+    getOrder,
+    getOrders
+} from './orderDetailController';
 
 export default {
     getUserDetail,
     getState,
     getDistrict,
-    getAllDistrict
+    getAllDistrict,
+    getOrder,
+    getOrders
 };

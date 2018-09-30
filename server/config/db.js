@@ -3,7 +3,7 @@
 import Sequelize from 'sequelize';
 import env from './env';
 import userDetail from '../models/userDetail.js';
-import order from '../models/order.js';
+import orderDetail from '../models/orderDetail.js';
 import state from '../models/state.js';
 import district from '../models/district.js';
 
@@ -28,17 +28,17 @@ db.sequelize = sequelize;
 
 //Models/tables
 db.userDetail = userDetail(sequelize, Sequelize);
-db.order = order(sequelize, Sequelize);
+db.orderDetail = orderDetail(sequelize, Sequelize);
 db.state = state(sequelize, Sequelize);
 db.district = district(sequelize, Sequelize);
 
 
 //tutor association
-db.order.belongsTo(db.userDetail, { foreignKey: 'buyer_id' });
-db.userDetail.hasMany(db.order, { foreignKey: 'buyer_id' });
+db.orderDetail.belongsTo(db.userDetail, { foreignKey: 'buyer_id' });
+db.userDetail.hasMany(db.orderDetail, { foreignKey: 'buyer_id' });
 
-db.order.belongsTo(db.userDetail, { foreignKey: 'seller_id' });
-db.userDetail.hasMany(db.order, { foreignKey: 'seller_id' });
+db.orderDetail.belongsTo(db.userDetail, { foreignKey: 'seller_id' });
+db.userDetail.hasMany(db.orderDetail, { foreignKey: 'seller_id' });
 
 db.userDetail.belongsTo(db.state, { foreignKey: 'state_id' });
 db.state.hasMany(db.userDetail, { foreignKey: 'state_id' });

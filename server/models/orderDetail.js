@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
-const order = (sequelize, DataTypes) => {
-  const tbl = sequelize.define('order', {
+const orderDetail = (sequelize, DataTypes) => {
+  const tbl = sequelize.define('orderDetail', {
     id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
@@ -33,4 +33,4 @@ const order = (sequelize, DataTypes) => {
 };
 
 
-export default order;
+export default orderDetail;
