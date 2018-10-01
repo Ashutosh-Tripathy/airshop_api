@@ -30,7 +30,7 @@ const userDetail = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       length: 50
     },
-    streetAddress: {
+    address: {
       type: DataTypes.STRING,
       length: 100
     },

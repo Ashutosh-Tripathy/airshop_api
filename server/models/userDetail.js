@@ -19,6 +19,12 @@ const userDetail = (sequelize, DataTypes) => {
         max: 9999999999
       }
     },
+    //1 buyer, 2 seller
+    type: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1
+    },
+
     state_id: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -31,16 +37,16 @@ const userDetail = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       length: 50
     },
-    streetAddress: {
+    address: {
       type: DataTypes.STRING,
       length: 100
     }
   }, {
-    paranoid: true,
-    timestamps: true,
-    underscored: true,
-    freezeTableName: true
-  });
+      paranoid: true,
+      timestamps: true,
+      underscored: true,
+      freezeTableName: true
+    });
   return tbl;
 };
 

@@ -3,11 +3,27 @@ import logger from '../logging/logger';
 import dal from '../dal';
 
 const Op = db.Sequelize.Op;
-export const getOrderDetail = (req, res) => {
-  const id = req.params.id;
-  logger.info(`get orderDetail: ${id}`);
+const getBuyerSellerCondition = (id) => ({
+  [Op.or]: [
+    {
+      buyer_id: {
+        [Op.eq]: id
+      }
+    },
+    {
+      seller_id: {
+        [Op.eq]: id
+      }
+    }
+  ]
+});
 
-  dal.findById(db.orderDetail, id)
+export const getOrderDetail = (req, res) => {
+  const user_id = req.params.user_id;
+  const order_id = req.params.order_id;
+  logger.info(`get orderDetail: ${order_id}`);
+
+  dal.findById(db.orderDetail, order_id, getBuyerSellerCondition(user_id))
     .then(({
       data,
       statusCode
@@ -17,25 +33,26 @@ export const getOrderDetail = (req, res) => {
 };
 
 export const getOrders = (req, res) => {
-  const buyer_id = req.query.buyer_id;
-  const seller_id = req.query.seller_id;
-  logger.info(`get orderDetails: buyer_id=${buyer_id}, seller_id:=${seller_id}`);
+  const user_id = req.params.user_id;
+  // const buyer_id = req.query.buyer_id;
+  // const seller_id = req.query.seller_id;
+  logger.info(`get orderDetails: user_id=${user_id}`);
   let condition = {};
-  if (buyer_id) {
-    condition.buyer_id = {
-      [Op.eq]: buyer_id
-    };
-  }
+  // if (buyer_id) {
+  //   condition.buyer_id = {
+  //     [Op.eq]: buyer_id
+  //   };
+  // }
 
-  if (seller_id || !buyer_id) {
-    condition.seller_id = {
-      [Op.eq]: seller_id
-    };
-  }
+  // if (seller_id || !buyer_id) {
+  //   condition.seller_id = {
+  //     [Op.eq]: seller_id
+  //   };
+  // }
 
-  dal.findByCondition(db.orderDetail, condition, [
-      ['created_at', 'DESC']
-    ])
+  dal.findByCondition(db.orderDetail, getBuyerSellerCondition(user_id), [
+    ['created_at', 'DESC']
+  ])
     .then(({
       data,
       statusCode
@@ -45,24 +62,33 @@ export const getOrders = (req, res) => {
 };
 
 export const insertOrderDetail = (req, res) => {
+  const user_id = req.params.user_id;
   const body = dal.convertObject(req.body, 'orderDetail', 'post');
   logger.info(`post orderDetail: ${JSON.stringify(body)}`);
-
-  dal.insertData(db.orderDetail, body)
-    .then(({
-      data,
-      statusCode
-    }) => {
-      res.status(statusCode).json(data);
+  if (req.body && req.body.buyer_id != user_id) {
+    logger.warn(`post orderDetail: user ${user_id} tried to insert data as user ${req.body.buyer_id}.`);
+    res.status(500).json({
+      message: 'Error occoured. Please try again later.'
     });
+  } else {
+    dal.insertData(db.orderDetail, body)
+      .then(({
+        data,
+        statusCode
+      }) => {
+        res.status(statusCode).json(data);
+      });
+  }
 };
 
 export const updateOrderDetail = (req, res) => {
-  const id = req.params.id;
+  const user_id = req.params.user_id;
+
+  const order_id = req.params.order_id;
   const body = dal.convertObject(req.body, 'orderDetail', 'patch');
   logger.info(`patch orderDetail: ${JSON.stringify(body)}`);
 
-  dal.updateById(db.orderDetail, body, id)
+  dal.updateById(db.orderDetail, body, order_id, getBuyerSellerCondition(user_id))
     .then(({
       data,
       statusCode

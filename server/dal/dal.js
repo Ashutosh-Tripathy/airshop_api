@@ -10,14 +10,14 @@ import {
 } from 'rsvp';
 const Op = db.Sequelize.Op;
 
-export const findById = (model, id) => new Promise((resolve, reject) => {
+export const findById = (model, id, whereCondition = {}) => new Promise((resolve, reject) => {
     model.findOne({
-            where: {
-                id: {
-                    [Op.eq]: id
-                }
+        where: Object.assign(whereCondition, {
+            id: {
+                [Op.eq]: id
             }
         })
+    })
         .then(data => {
             if (!data) {
                 resolve({
@@ -43,9 +43,9 @@ export const findById = (model, id) => new Promise((resolve, reject) => {
 
 export const findByCondition = (model, condition, orderBy) => new Promise((resolve, reject) => {
     model.findAll({
-            where: condition,
-            order: orderBy || []
-        })
+        where: condition,
+        order: orderBy || []
+    })
         .then(data => {
             if (!data) {
                 resolve({
@@ -94,15 +94,15 @@ export const insertData = (model, data) => new Promise((resolve, reject) => {
         }));
 });
 
-export const updateById = (model, data, id) => new Promise((resolve, reject) => {
+export const updateById = (model, data, id, whereCondition = {}) => new Promise((resolve, reject) => {
     model.update(
-            data, {
-                where: {
-                    id: {
-                        [Op.eq]: id
-                    }
+        data, {
+            where: Object.assign(whereCondition, {
+                id: {
+                    [Op.eq]: id
                 }
             })
+        })
         .then(out => {
             if (!out[0]) {
                 resolve({
@@ -126,14 +126,14 @@ export const updateById = (model, data, id) => new Promise((resolve, reject) => 
         }));
 });
 
-export const deleteById = (model, id) => new Promise((resolve, reject) => {
+export const deleteById = (model, id, whereCondition = {}) => new Promise((resolve, reject) => {
     model.destroy({
-            where: {
-                id: {
-                    [Op.eq]: id
-                }
+        where: Object.assign(whereCondition, {
+            id: {
+                [Op.eq]: id
             }
         })
+    })
         .then(affectedRows => {
             if (!affectedRows) {
                 resolve({

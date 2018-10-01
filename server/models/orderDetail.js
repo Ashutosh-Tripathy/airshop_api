@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 
 const orderDetail = (sequelize, DataTypes) => {
-  const tbl = sequelize.define('orderDetail', {
+  const tbl = sequelize.define('order_detail', {
     id: {
       type: DataTypes.BIGINT,
       primaryKey: true,
@@ -15,7 +15,9 @@ const orderDetail = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    status_id: {
+
+    //1: Pending for approval, 2: Wating to be shipped, 3: Out for delivery, 4: Delivered, 5: Closed
+    status: {
       type: DataTypes.INTEGER,
       defaultValue: 1
     },
@@ -24,11 +26,11 @@ const orderDetail = (sequelize, DataTypes) => {
       length: 5000
     }
   }, {
-    paranoid: true,
-    timestamps: true,
-    underscored: true,
-    freezeTableName: true
-  });
+      paranoid: true,
+      timestamps: true,
+      underscored: true,
+      freezeTableName: true
+    });
   return tbl;
 };
 

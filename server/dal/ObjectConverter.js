@@ -1,8 +1,8 @@
-const userDetail = ['id', 'name', 'mobile', 'state_id', 'district_id', 'area', 'streetAddress', `created_at`, `updated_at`, `deleted_at`];
-const postUserDetail = ['id', 'name', 'mobile', 'state_id', 'district_id', 'area', 'streetAddress'];
-const orderDetail = ['id', 'buyer_id', 'seller_id', 'status_id', 'note', `created_at`, `updated_at`, `deleted_at`];
-const postOrderDetail = ['id', 'buyer_id', 'seller_id', 'status_id', 'note'];
-const patchOrderDetail = ['status_id'];
+const userDetail = ['id', 'name', 'mobile', 'type', 'state_id', 'district_id', 'area', 'address', `created_at`, `updated_at`, `deleted_at`];
+const postUserDetail = ['id', 'name', 'mobile', 'type', 'state_id', 'district_id', 'area', 'address'];
+const orderDetail = ['id', 'buyer_id', 'seller_id', 'status', 'note', `created_at`, `updated_at`, `deleted_at`];
+const postOrderDetail = ['id', 'buyer_id', 'seller_id', 'status', 'note'];
+const patchOrderDetail = ['status'];
 
 const objectMap = {
     'userDetail': {
@@ -31,7 +31,7 @@ const convertObject = (data, objectType, requestType = 'get') => {
             obj[key] = data[key];
             return obj;
         }, {});
-    // console.log(filtered);
+    console.log(filtered);
     return filtered;
 };
 
