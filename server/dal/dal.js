@@ -9,6 +9,18 @@ import {
     reject
 } from 'rsvp';
 const Op = db.Sequelize.Op;
+const notFound = {
+    data: {
+        message: 'Resource not found.'
+    },
+    statusCode: 404
+};
+const serverError = {
+    data: {
+        message: 'Error occoured. Please try again later.'
+    },
+    statusCode: 500
+};
 
 export const findById = (model, id, whereCondition = {}) => new Promise((resolve, reject) => {
     model.findOne({
@@ -20,12 +32,7 @@ export const findById = (model, id, whereCondition = {}) => new Promise((resolve
     })
         .then(data => {
             if (!data) {
-                resolve({
-                    data: {
-                        message: 'Resource not found.'
-                    },
-                    statusCode: 404
-                });
+                resolve(notFound);
             } else {
                 resolve({
                     data,
@@ -33,12 +40,7 @@ export const findById = (model, id, whereCondition = {}) => new Promise((resolve
                 });
             }
         })
-        .catch((err) => resolve({
-            data: {
-                message: 'Error occoured. Please try again later.'
-            },
-            statusCode: 500
-        }));
+        .catch((err) => resolve(serverError));
 });
 
 export const findByCondition = (model, condition, orderBy) => new Promise((resolve, reject) => {
@@ -48,12 +50,7 @@ export const findByCondition = (model, condition, orderBy) => new Promise((resol
     })
         .then(data => {
             if (!data) {
-                resolve({
-                    data: {
-                        message: 'Resource not found.'
-                    },
-                    statusCode: 404
-                });
+                resolve(notFound);
             } else {
                 resolve({
                     data,
@@ -61,24 +58,14 @@ export const findByCondition = (model, condition, orderBy) => new Promise((resol
                 });
             }
         })
-        .catch((err) => resolve({
-            data: {
-                message: 'Error occoured. Please try again later.'
-            },
-            statusCode: 500
-        }));
+        .catch((err) => resolve(serverError));
 });
 
 export const insertData = (model, data) => new Promise((resolve, reject) => {
     model.create(data)
         .then(out => {
             if (!out) {
-                resolve({
-                    data: {
-                        message: 'Resource not created.'
-                    },
-                    statusCode: 500
-                });
+                resolve(serverError);
             } else {
                 resolve({
                     data: out,
@@ -86,12 +73,7 @@ export const insertData = (model, data) => new Promise((resolve, reject) => {
                 });
             }
         })
-        .catch((err) => resolve({
-            data: {
-                message: 'Error occoured. Please try again later.'
-            },
-            statusCode: 500
-        }));
+        .catch((err) => resolve(serverError));
 });
 
 export const updateById = (model, data, id, whereCondition = {}) => new Promise((resolve, reject) => {
@@ -105,12 +87,7 @@ export const updateById = (model, data, id, whereCondition = {}) => new Promise(
         })
         .then(out => {
             if (!out[0]) {
-                resolve({
-                    data: {
-                        message: 'Resource not found.'
-                    },
-                    statusCode: 404
-                });
+                resolve(notFound);
             } else {
                 resolve({
                     data: out,
@@ -118,12 +95,7 @@ export const updateById = (model, data, id, whereCondition = {}) => new Promise(
                 });
             }
         })
-        .catch((err) => resolve({
-            data: {
-                message: 'Error occoured. Please try again later.'
-            },
-            statusCode: 500
-        }));
+        .catch((err) => resolve(serverError));
 });
 
 export const deleteById = (model, id, whereCondition = {}) => new Promise((resolve, reject) => {
@@ -136,12 +108,7 @@ export const deleteById = (model, id, whereCondition = {}) => new Promise((resol
     })
         .then(affectedRows => {
             if (!affectedRows) {
-                resolve({
-                    data: {
-                        message: 'Resource not found.'
-                    },
-                    statusCode: 404
-                });
+                resolve(notFound);
             } else {
                 resolve({
                     data: affectedRows,
@@ -149,12 +116,7 @@ export const deleteById = (model, id, whereCondition = {}) => new Promise((resol
                 });
             }
         })
-        .catch((err) => resolve({
-            data: {
-                message: 'Error occoured. Please try again later.'
-            },
-            statusCode: 500
-        }));
+        .catch((err) => resolve(serverError));
 });
 
 export const testFn = (model, id) => new Promise((resolve, reject) => {
