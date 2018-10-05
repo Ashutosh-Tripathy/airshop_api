@@ -43,6 +43,23 @@ export const findById = (model, id, whereCondition = {}) => new Promise((resolve
         .catch((err) => resolve(serverError));
 });
 
+// query='SELECT `order_detail`.`id`, `buyer_id` AS `buyerId`, `seller_id` AS `sellerId`, `status`, `note`, `order_detail`.`created_at`, `order_detail`.`updated_at`, `order_detail`.`deleted_at`, `buyer_id`, `seller_id` , u1.name as buyerName, u2.name AS sellerName FROM `order_detail` AS `order_detail` inner join `user_detail` AS u1 on order_detail.buyer_id = u1.id inner join `user_detail` AS u2 on order_detail.seller_id = u2.id WHERE ((`order_detail`.`deleted_at` IS NULL) AND (`order_detail`.`buyer_id` = :id OR `order_detail`.`seller_id` = :id)) ORDER BY `order_detail`.`created_at` DESC;'
+// replacements = { status: 'active' }
+export const findByRawQuery = (query, replacements) => new Promise((resolve, reject) => {
+    db.sequelize.query(query, { replacements, type: db.sequelize.QueryTypes.SELECT })
+        .then(data => {
+            if (!data) {
+                resolve(notFound);
+            } else {
+                resolve({
+                    data,
+                    statusCode: 200
+                });
+            }
+        })
+        .catch((err) => resolve(serverError));
+});
+
 export const findByCondition = (model, condition, orderBy, include = []) => new Promise((resolve, reject) => {
     model.findAll({
         where: condition,

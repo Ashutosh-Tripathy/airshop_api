@@ -65,7 +65,7 @@ export const insertOrderDetail = (req, res) => {
   const userId = req.params.user_id;
   const body = dal.convertObject(req.body, 'orderDetail', 'post');
   logger.info(`post orderDetail: ${JSON.stringify(body)}`);
-  if (req.body && req.body.buyer_id != userId) {
+  if (req.body && req.body.buyerId != userId) {
     logger.warn(`post orderDetail: user ${userId} tried to insert data as user ${req.body.buyer_id}.`);
     res.status(500).json({
       message: 'Error occoured. Please try again later.'

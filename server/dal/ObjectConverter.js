@@ -1,7 +1,7 @@
-const userDetail = ['id', 'name', 'mobile', 'type', 'state_id', 'district_id', 'area', 'address', `created_at`, `updated_at`, `deleted_at`];
+const userDetail = ['id', 'name', 'mobile', 'type', 'stateId', 'districtId', 'area', 'address', `created_at`, `updated_at`, `deleted_at`];
 const postUserDetail = ['id', 'name', 'mobile', 'type', 'stateId', 'districtId', 'area', 'address'];
-const orderDetail = ['id', 'buyer_id', 'seller_id', 'status', 'note', `created_at`, `updated_at`, `deleted_at`];
-const postOrderDetail = ['id', 'buyer_id', 'seller_id', 'status', 'note'];
+const orderDetail = ['id', 'buyerId', 'sellerId', 'status', 'note', `created_at`, `updated_at`, `deleted_at`];
+const postOrderDetail = ['id', 'buyerId', 'sellerId', 'status', 'note'];
 const patchOrderDetail = ['status'];
 
 const objectMap = {
