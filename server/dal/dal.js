@@ -43,10 +43,11 @@ export const findById = (model, id, whereCondition = {}) => new Promise((resolve
         .catch((err) => resolve(serverError));
 });
 
-export const findByCondition = (model, condition, orderBy) => new Promise((resolve, reject) => {
+export const findByCondition = (model, condition, orderBy, include = []) => new Promise((resolve, reject) => {
     model.findAll({
         where: condition,
-        order: orderBy || []
+        order: orderBy || [],
+        include
     })
         .then(data => {
             if (!data) {
