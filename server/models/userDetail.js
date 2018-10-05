@@ -24,14 +24,15 @@ const userDetail = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 1
     },
-
-    state_id: {
+    stateId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'state_id'
     },
-    district_id: {
+    districtId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'district_id'
     },
     area: {
       type: DataTypes.STRING,
@@ -45,6 +46,7 @@ const userDetail = (sequelize, DataTypes) => {
       paranoid: true,
       timestamps: true,
       underscored: true,
+      underscoredAll: true,
       freezeTableName: true
     });
   return tbl;

@@ -10,16 +10,18 @@ const district = (sequelize, DataTypes) => {
       allowNull: false,
       length: 50,
     },
-    state_id: {
+    stateId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'state_id'
     }
   }, {
-    paranoid: false,
-    timestamps: false,
-    underscored: true,
-    freezeTableName: true
-  });
+      paranoid: false,
+      timestamps: false,
+      underscored: true,
+      underscoredAll: true,
+      freezeTableName: true
+    });
   return tbl;
 };
 

@@ -15,6 +15,7 @@ const state = (sequelize, DataTypes) => {
     paranoid: false,
     timestamps: false,
     underscored: true,
+    underscoredAll: true,
     freezeTableName: true
   });
   return tbl;

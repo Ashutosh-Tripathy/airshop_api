@@ -7,13 +7,15 @@ const orderDetail = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    buyer_id: {
+    buyerId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'buyer_id'
     },
-    seller_id: {
+    sellerId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'seller_id'
     },
 
     //1: Pending for approval, 2: Wating to be shipped, 3: Out for delivery, 4: Delivered, 5: Closed
@@ -29,6 +31,7 @@ const orderDetail = (sequelize, DataTypes) => {
       paranoid: true,
       timestamps: true,
       underscored: true,
+      underscoredAll: true,
       freezeTableName: true
     });
   return tbl;

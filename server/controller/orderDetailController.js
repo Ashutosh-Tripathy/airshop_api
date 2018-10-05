@@ -33,10 +33,10 @@ export const getOrderDetail = (req, res) => {
 };
 
 export const getOrders = (req, res) => {
-  const user_id = req.params.user_id;
+  const userId = req.params.user_id;
   // const buyer_id = req.query.buyer_id;
   // const seller_id = req.query.seller_id;
-  logger.info(`get orderDetails: user_id=${user_id}`);
+  logger.info(`get orderDetails: user_id=${userId}`);
   let condition = {};
   // if (buyer_id) {
   //   condition.buyer_id = {
@@ -50,7 +50,7 @@ export const getOrders = (req, res) => {
   //   };
   // }
 
-  dal.findByCondition(db.orderDetail, getBuyerSellerCondition(user_id), [
+  dal.findByCondition(db.orderDetail, getBuyerSellerCondition(userId), [
     ['created_at', 'DESC']
   ])
     .then(({
@@ -62,11 +62,11 @@ export const getOrders = (req, res) => {
 };
 
 export const insertOrderDetail = (req, res) => {
-  const user_id = req.params.user_id;
+  const userId = req.params.user_id;
   const body = dal.convertObject(req.body, 'orderDetail', 'post');
   logger.info(`post orderDetail: ${JSON.stringify(body)}`);
-  if (req.body && req.body.buyer_id != user_id) {
-    logger.warn(`post orderDetail: user ${user_id} tried to insert data as user ${req.body.buyer_id}.`);
+  if (req.body && req.body.buyer_id != userId) {
+    logger.warn(`post orderDetail: user ${userId} tried to insert data as user ${req.body.buyer_id}.`);
     res.status(500).json({
       message: 'Error occoured. Please try again later.'
     });
@@ -82,13 +82,13 @@ export const insertOrderDetail = (req, res) => {
 };
 
 export const updateOrderDetail = (req, res) => {
-  const user_id = req.params.user_id;
+  const userId = req.params.user_id;
 
-  const order_id = req.params.order_id;
+  const orderId = req.params.order_id;
   const body = dal.convertObject(req.body, 'orderDetail', 'patch');
   logger.info(`patch orderDetail: ${JSON.stringify(body)}`);
 
-  dal.updateById(db.orderDetail, body, order_id, getBuyerSellerCondition(user_id))
+  dal.updateById(db.orderDetail, body, orderId, getBuyerSellerCondition(userId))
     .then(({
       data,
       statusCode

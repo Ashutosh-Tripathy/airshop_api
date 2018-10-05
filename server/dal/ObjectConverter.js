@@ -1,5 +1,5 @@
 const userDetail = ['id', 'name', 'mobile', 'type', 'state_id', 'district_id', 'area', 'address', `created_at`, `updated_at`, `deleted_at`];
-const postUserDetail = ['id', 'name', 'mobile', 'type', 'state_id', 'district_id', 'area', 'address'];
+const postUserDetail = ['id', 'name', 'mobile', 'type', 'stateId', 'districtId', 'area', 'address'];
 const orderDetail = ['id', 'buyer_id', 'seller_id', 'status', 'note', `created_at`, `updated_at`, `deleted_at`];
 const postOrderDetail = ['id', 'buyer_id', 'seller_id', 'status', 'note'];
 const patchOrderDetail = ['status'];
@@ -25,6 +25,10 @@ const convertObject = (data, objectType, requestType = 'get') => {
     // }
     // console.log(allowedKeys);
     // console.log(data);
+    console.log(data);
+    console.log(allowedKeys);
+    console.log(requestType);
+
     const filtered = Object.keys(data)
         .filter(key => allowedKeys.includes(key))
         .reduce((obj, key) => {
