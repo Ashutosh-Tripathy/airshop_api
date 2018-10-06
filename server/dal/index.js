@@ -1,5 +1,6 @@
 import {
     findById,
+    findByRawQuery,
     findByCondition,
     insertData,
     updateById,
@@ -10,6 +11,7 @@ import convertObject from './ObjectConverter';
 
 export default {
     findById,
+    findByRawQuery,
     findByCondition,
     insertData,
     updateById,

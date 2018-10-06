@@ -34,25 +34,18 @@ export const getOrderDetail = (req, res) => {
 
 export const getOrders = (req, res) => {
   const userId = req.params.user_id;
-  // const buyer_id = req.query.buyer_id;
-  // const seller_id = req.query.seller_id;
   logger.info(`get orderDetails: user_id=${userId}`);
   let condition = {};
-  // if (buyer_id) {
-  //   condition.buyer_id = {
-  //     [Op.eq]: buyer_id
-  //   };
-  // }
 
-  // if (seller_id || !buyer_id) {
-  //   condition.seller_id = {
-  //     [Op.eq]: seller_id
-  //   };
-  // }
-
-  dal.findByCondition(db.orderDetail, getBuyerSellerCondition(userId), [
-    ['created_at', 'DESC']
-  ])
+  dal.findByRawQuery(`SELECT order_detail.id, buyer_id AS buyerId, seller_id AS sellerId, status, note, order_detail.created_at,
+            order_detail.updated_at, order_detail.deleted_at, buyer_id, seller_id , u1.name as buyerName, u2.name AS sellerName
+            FROM order_detail AS order_detail
+            inner join user_detail AS u1 on order_detail.buyer_id = u1.id
+            inner join user_detail AS u2 on order_detail.seller_id = u2.id
+            WHERE ((order_detail.deleted_at IS NULL)
+            AND (order_detail.buyer_id = :id OR order_detail.seller_id = :id))
+            ORDER BY order_detail.created_at DESC;`,
+    { id: userId })
     .then(({
       data,
       statusCode
@@ -96,3 +89,20 @@ export const updateOrderDetail = (req, res) => {
       res.status(statusCode).json(data);
     });
 };
+
+
+// if (buyer_id) {
+  //   condition.buyer_id = {
+  //     [Op.eq]: buyer_id
+  //   };
+  // }
+
+  // if (seller_id || !buyer_id) {
+  //   condition.seller_id = {
+  //     [Op.eq]: seller_id
+  //   };
+  // }
+
+  // dal.findByCondition(db.orderDetail, getBuyerSellerCondition(userId), [
+  //   ['created_at', 'DESC']
+  // ])

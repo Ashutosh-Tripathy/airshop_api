@@ -1,13 +1,8 @@
 import db from '../config/db';
-import {
-    resolve
-} from 'path';
-import {
-    throws
-} from 'assert';
-import {
-    reject
-} from 'rsvp';
+import { resolve } from 'path';
+import { throws } from 'assert';
+import { reject } from 'rsvp';
+
 const Op = db.Sequelize.Op;
 const notFound = {
     data: {
