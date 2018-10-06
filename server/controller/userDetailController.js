@@ -4,10 +4,10 @@ import dal from '../dal';
 
 const Op = db.Sequelize.Op;
 export const getUserDetail = (req, res) => {
-  const user_id = req.params.user_id;
-  logger.info(`get userDetail: ${user_id}`);
+  const userId = req.params.userId;
+  logger.info(`get userDetail: ${userId}`);
 
-  dal.findById(db.userDetail, user_id)
+  dal.findById(db.userDetail, userId)
     .then(({
       data,
       statusCode

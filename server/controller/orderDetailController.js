@@ -19,11 +19,11 @@ const getBuyerSellerCondition = (id) => ({
 });
 
 export const getOrderDetail = (req, res) => {
-  const user_id = req.params.user_id;
-  const order_id = req.params.order_id;
-  logger.info(`get orderDetail: ${order_id}`);
+  const userId = req.params.userId;
+  const orderId = req.params.orderId;
+  logger.info(`get orderDetail: ${orderId}`);
 
-  dal.findById(db.orderDetail, order_id, getBuyerSellerCondition(user_id))
+  dal.findById(db.orderDetail, orderId, getBuyerSellerCondition(userId))
     .then(({
       data,
       statusCode
@@ -33,8 +33,8 @@ export const getOrderDetail = (req, res) => {
 };
 
 export const getOrders = (req, res) => {
-  const userId = req.params.user_id;
-  logger.info(`get orderDetails: user_id=${userId}`);
+  const userId = req.params.userId;
+  logger.info(`get orderDetails: userId=${userId}`);
   let condition = {};
 
   dal.findByRawQuery(`SELECT order_detail.id, buyer_id AS buyerId, seller_id AS sellerId, status, note, order_detail.created_at,
@@ -55,7 +55,7 @@ export const getOrders = (req, res) => {
 };
 
 export const insertOrderDetail = (req, res) => {
-  const userId = req.params.user_id;
+  const userId = req.params.userId;
   const body = dal.convertObject(req.body, 'orderDetail', 'post');
   logger.info(`post orderDetail: ${JSON.stringify(body)}`);
   if (req.body && req.body.buyerId != userId) {
@@ -75,9 +75,9 @@ export const insertOrderDetail = (req, res) => {
 };
 
 export const updateOrderDetail = (req, res) => {
-  const userId = req.params.user_id;
+  const userId = req.params.userId;
 
-  const orderId = req.params.order_id;
+  const orderId = req.params.orderId;
   const body = dal.convertObject(req.body, 'orderDetail', 'patch');
   logger.info(`patch orderDetail: ${JSON.stringify(body)}`);
 

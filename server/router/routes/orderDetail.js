@@ -3,10 +3,10 @@
 import controller from '../../controller';
 
 const userDetailRoutes = (router, db) => {
-  router.get('/userdetail/:user_id/orderdetail/:order_id', controller.getOrderDetail);
-  router.post('/userdetail/:user_id/orderdetail', controller.insertOrderDetail);
-  router.get('/userdetail/:user_id/orders', controller.getOrders);
-  router.patch('/userdetail/:user_id/orderdetail/:order_id', controller.updateOrderDetail);
+  router.get('/userdetail/:userId/orderdetail/:orderId', controller.getOrderDetail);
+  router.post('/userdetail/:userId/orderdetail', controller.insertOrderDetail);
+  router.get('/userdetail/:userId/orders', controller.getOrders);
+  router.patch('/userdetail/:userId/orderdetail/:orderId', controller.updateOrderDetail);
   //router.post('userdetail', controller.createUserDetail);
 };
 export default userDetailRoutes;
